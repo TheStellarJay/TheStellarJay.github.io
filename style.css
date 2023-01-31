@@ -1,0 +1,97 @@
+/* basic layout */
+.html, body {
+	height: 100%;
+	width: 100%;
+}
+#facegrid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, 105px);
+	gap: 5px;
+	max-width: 90%;
+	margin: 0 auto;
+	justify-content: center;
+}
+.onefiftygrid {
+	grid-template-columns: repeat(auto-fill, 160px) !important ;
+	gap: 5px !important ;
+}
+.twohundredgrid {
+	grid-template-columns: repeat(auto-fill, 210px) !important ;
+	gap: 10px !important ;
+}
+.face {
+	width: 100px;
+	height: 100px;
+}
+
+/* overlay 1 */
+#guess_button {
+	z-index: 1;
+	position: fixed;
+	left: 50px;
+	bottom: 50px;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+	border: 1px solid #000;
+}
+.menu {
+	z-index: 1;
+	position: fixed;
+    display: none;
+    background-color: white;
+	width: 100px; /* Set a fixed width */
+    height: auto; /* Allow the height to adjust to the content */
+    flex-direction: column; /* Change the direction of the flex container to column */
+    border: 1px solid gray;
+}
+.menu ul {
+    list-style: none; /* Remove the bullet points */
+    padding: 0; /* Remove the padding */
+    margin: 0; /* Remove the margin */
+    display: flex; /* Make the <ul> a flex container */
+    flex-direction: column; /* Change the direction of the flex items to column */
+}
+.menu li {
+	display: block;
+	font-size: 16px;
+    padding: 10px; /* Add some padding */
+    text-align: center; /* Center the text */
+}
+.menu .sub-menu {
+    display: none; /* Hide the sub-menu by default */
+    position: absolute; /* Position the sub-menu relative to the parent li */
+    background-color: white;
+    border: 1px solid gray;
+	width: 150px;
+    bottom: -1px; /* Position the sub-menu at the top of the parent li */
+    left: 100%; /* Position the sub-menu to the right of the parent li */
+}
+
+.menu li:hover .sub-menu {
+    display: block; /* Show the sub-menu when the parent li is hovered */
+}
+/* overlay 2 */
+
+
+/* animations */
+
+/* .menu li:hover {
+	background-color: #d9d9d9;
+}
+.facegrid {
+	transition: grid-template-columns 0.5s;
+}
+.face {
+	transition: width 2s, height 2s;
+}
+ */
+/* adaptivity */
+@media (max-width: 600px) {
+	.facegrid {
+		max-width: 100%;
+	}
+}
+div {
+	display:inline;
+}
