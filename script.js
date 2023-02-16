@@ -6,8 +6,8 @@ let faces = []
 /* Classes */
 class Face {
 	constructor(imagename) {
-		this.element = document.createElement("img");
-		this.element.setAttribute("src", `testpics/${imagename}.png`);
+		this.element = document.createElement("div");
+		this.element.innerHTML = `<img src='testpics/${imagename}.png'><p>Name</p>`;
 		this.element.classList.add("face");
 
 		this.properties = []
@@ -29,47 +29,59 @@ class Face {
 		this.properties = props;
 	}
 
-	delete() {
-		this.element.remove();
+	async delete() {
+		this.element.remove()
 		faces.splice(faces.indexOf(this), 1);
 	}
 }
 
 /* Functions */
-function guess(prop) {
-	var faces_to_delete = [];
-	for (var face in faces) {
+async function guess(prop) {
+	let face;
+	let faces_to_delete = [];
+	let correct = document.getElementById("correct_screen");
+
+	// Show Correct Screen
+	correct.style.visibility = "visible";
+
+	// Delete Faces
+	for (face in faces) {
 		if (faces[face].hasProperty(prop)) {
 			faces_to_delete.push(faces[face]);
 		}
 	}
-	for (var face in faces_to_delete) {
+	for (face in faces_to_delete) {
 		faces_to_delete[face].delete();
 	}
 
-	var face_grid = document.getElementById("facegrid");
+	let face_grid = document.getElementById("facegrid");
 
+
+	// Animate Removal
+	correct.style.opacity = "0";
+
+	// Wait 1 seconds
+	await new Promise(resolve => setTimeout(resolve, 1000));
 	if (faces.length < 11) {
+
 		face_grid.classList.add("twohundredgrid");
 		for (face in faces) {
 			change_image_size(faces[face], 200);
 		}
-	}
-	else if (faces.length < 51) {
+	} else if (faces.length < 51) {
 		face_grid.classList.add("onefiftygrid");
 		for (face in faces) {
 			change_image_size(faces[face], 150);
 		}
 	}
+
+	correct.style.visibility = "hidden";
+	correct.style.opacity = "1";
 }
 
 function change_image_size(img, new_size) {
 	img.element.style.width = new_size + "px";
 	img.element.style.height = new_size + "px";
-}
-
-function overlay_text(title, text, color) {
-	console.log("Not yet implemented")
 }
 
 /* Actual Code Now */
@@ -94,7 +106,8 @@ document.addEventListener("click", function(e) {
 	}
 });
 
-for (var i = 0; i < guessableitems.length; i++) {
+let i;
+for (i = 0; i < guessableitems.length; i++) {
 	let item = guessableitems[i]
 	var menu_item = document.getElementById(item);
 	menu_item.addEventListener("click", function() {
@@ -103,8 +116,8 @@ for (var i = 0; i < guessableitems.length; i++) {
 }
 
 // Generate Faces
-for (var i = 0; i < 99; i++) {
-	var faceitem = new Face(i);
+for (i = 0; i < 99; i++) {
+	let faceitem = new Face(i);
 	faceitem.setProperties(props[i])
 	faces.push(faceitem);
 	face_grid.appendChild(faceitem.element);
