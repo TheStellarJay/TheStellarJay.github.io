@@ -12,7 +12,6 @@ class Face {
 
 		this.properties = []
 	}
-
 	addProperty(prop) {
 		this.properties.push(prop);
 	}
@@ -64,24 +63,20 @@ async function guess(prop) {
 	await new Promise(resolve => setTimeout(resolve, 1000));
 	if (faces.length < 11) {
 
-		face_grid.classList.add("twohundredgrid");
-		for (face in faces) {
-			change_image_size(faces[face], 200);
+		face_grid.classList.add("largegrid");
+		for (let face in faces) {
+			console.log(face)
+			faces[face].element.classList.add("largeface");
 		}
 	} else if (faces.length < 51) {
-		face_grid.classList.add("onefiftygrid");
-		for (face in faces) {
-			change_image_size(faces[face], 150);
+		face_grid.classList.add("mediumgrid");
+		for (let face in faces) {
+			faces[face].element.classList.add("mediumface");
 		}
 	}
 
 	correct.style.visibility = "hidden";
 	correct.style.opacity = "1";
-}
-
-function change_image_size(img, new_size) {
-	img.element.style.width = new_size + "px";
-	img.element.style.height = new_size + "px";
 }
 
 /* Actual Code Now */

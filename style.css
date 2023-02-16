@@ -13,38 +13,55 @@
 	justify-content: center;
 	transition: 0.3s;
 }
-.onefiftygrid {
-	grid-template-columns: repeat(auto-fill, 160px) !important ;
+.mediumgrid {
+	grid-template-columns: repeat(auto-fill, 190px) !important ;
 	gap: 5px !important ;
 }
-.twohundredgrid {
-	grid-template-columns: repeat(auto-fill, 210px) !important ;
+.largegrid {
+	grid-template-columns: repeat(auto-fill, 240px) !important ;
 	gap: 10px !important ;
 }
+
 .face {
 	background: #ffca46;
 	width: 110px;
 	border-radius: 15px;
 	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-	transition: 0.3s;
 	justify-content: center;
 	align-items: center;
 	text-align: center;
 	margin-bottom: 10px;
 	padding: 7px;
+	font-size: medium;
+	transition: 0.3s;
 }
 .face img {
 	width: 100px;
 	height: 100px;
 	border-radius: 15px;
 	margin-top: 5px;
-	transition: 0.3s;
+	transition: 1s;
 }
 .face p {
 	display: inline;
-	width: 100%;
-	padding-bottom: 10px;
 }
+.mediumface {
+	width: 165px;
+	font-size: large;
+}
+.mediumface img {
+	width: 155px;
+	height: 155px;
+}
+.largeface {
+	width: 215px;
+	font-size: x-large;
+}
+.largeface img {
+	width: 205px !important;
+	height: 205px !important;
+}
+
 
 /* overlay 1 */
 #guess_button {
