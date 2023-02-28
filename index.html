@@ -10,12 +10,12 @@
 
 <body>
 	<div id="facegrid"></div>
-	<button id="guess_button">Guess!</button>
+	<button id="guess_button">?</button>
 	<div id="correct_screen">
-		<h1>Yes</h1>
+		<h1>Correct Guess!</h1>
 	</div>
 	<div id="wrong_screen">
-		<h1>No</h1>
+		<h1>Incorrect Guess</h1>
 	</div>
 	<div class="menu" id="guess_menu">
 		<ul>
@@ -38,6 +38,29 @@
 			</li>
 		</ul>
 	</div>
+	<div class="sidebar" id="guess_sidebar">
+		<ul>
+			<li id="eyesside" class="parent_item"><a href="#">Eyes</a>
+				<ul class="sub-sidebar">
+					<li id="ambereyesside"><a href="#">Amber Eyes</a></li>
+					<li id="blueeyesside"><a href="#">Blue Eyes</a></li>
+					<li id="browneyesside"><a href="#">Brown Eyes</a></li>
+					<li id="greeneyesside"><a href="#">Green Eyes</a></li>
+					<li id="hazeleyesside"><a href="#">Hazel Eyes</a></li>
+					<li id="redeyesside"><a href="#">Red Eyes</a></li>
+				</ul>
+			</li>
+			<li id="hairside" class="parent_item"><a href="#">Hair</a>
+				<ul class="sub-sidebar">
+					<li id="blondehairside"><a href="#">Blonde</a></li>
+					<li id="gingerhairside"><a href="#">Ginger</a></li>
+					<li id="brownhairside"><a href="#">Brown</a></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+
+
 	<script type="module" src="script.js"></script>
 </body>
 

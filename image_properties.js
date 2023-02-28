@@ -1,3 +1,4 @@
+export const correct_guesses = ["brownhair", "ambereyes"]
 export const guessableitems = [
 	"ambereyes", "blueeyes", "browneyes", "greeneyes", "hazeleyes", "redeyes",
 	"blondehair", "gingerhair", "brownhair"

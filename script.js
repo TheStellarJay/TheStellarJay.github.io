@@ -1,4 +1,4 @@
-import { props, guessableitems } from "./image_properties.js";
+import { props, guessableitems, correct_guesses } from "./image_properties.js";
 
 let face_grid = document.getElementById("facegrid");
 let faces = []
@@ -38,16 +38,26 @@ class Face {
 async function guess(prop) {
 	let face;
 	let faces_to_delete = [];
-	let correct = document.getElementById("correct_screen");
+	let correct = correct_guesses.includes(prop);
+	let correct_screen = document.getElementById("correct_screen");
+	let wrong_screen = document.getElementById("wrong_screen");
+	let guess_screen = wrong_screen;
 
 	// Show Correct Screen
-	correct.style.visibility = "visible";
+	if (correct) {
+		guess_screen = correct_screen;
+	}
+
+	guess_screen.style.visibility = "visible";
 
 	// Delete Faces
 	for (face in faces) {
-		if (faces[face].hasProperty(prop)) {
+		if (correct && !faces[face].hasProperty(prop)) {
+			faces_to_delete.push(faces[face]);
+		} else if (!correct && faces[face].hasProperty(prop)) {
 			faces_to_delete.push(faces[face]);
 		}
+
 	}
 	for (face in faces_to_delete) {
 		faces_to_delete[face].delete();
@@ -57,12 +67,11 @@ async function guess(prop) {
 
 
 	// Animate Removal
-	correct.style.opacity = "0";
+	guess_screen.style.opacity = "0";
 
 	// Wait 1 seconds
-	await new Promise(resolve => setTimeout(resolve, 1000));
+	await new Promise(resolve => setTimeout(resolve, 1500));
 	if (faces.length < 11) {
-
 		face_grid.classList.add("largegrid");
 		for (let face in faces) {
 			console.log(face)
@@ -75,23 +84,35 @@ async function guess(prop) {
 		}
 	}
 
-	correct.style.visibility = "hidden";
-	correct.style.opacity = "1";
+	guess_screen.style.visibility = "hidden";
+	guess_screen.style.opacity = "1";
 }
 
-/* Actual Code Now */
+function toggleSidebar() {
+	let sidebar = document.getElementById("guess_sidebar");
+	if (sidebar.style.left == "0px") {
+		sidebar.style.left = "-100%";
+	} else {
+		sidebar.style.left = "0px";
+	}
+}
 
 let guess_button = document.getElementById("guess_button");
 let menu = document.getElementById("guess_menu");
 
 guess_button.addEventListener("click", function() {
-	// Check if the menu is open
-	if (menu.style.display == "block") {
-		menu.style.display = "none";
+	// Do not open the menu on mobile
+	if (window.innerWidth < 600) {
+		toggleSidebar();
 	} else {
-		menu.style.display = "block";
-		menu.style.left = guess_button.offsetLeft + "px";
-		menu.style.top = guess_button.offsetTop - menu.offsetHeight + "px";
+		// Check if the menu is open
+		if (menu.style.display == "block") {
+			menu.style.display = "none";
+		} else {
+			menu.style.display = "block";
+			menu.style.left = guess_button.offsetLeft + "px";
+			menu.style.top = guess_button.offsetTop - menu.offsetHeight - 5 + "px";
+		}
 	}
 });
 document.addEventListener("click", function(e) {
@@ -108,7 +129,49 @@ for (i = 0; i < guessableitems.length; i++) {
 	menu_item.addEventListener("click", function() {
 		guess(item);
 	});
+
+	var sidebar_item = document.getElementById(item + "side");
+	sidebar_item.addEventListener("click", function() {
+		guess(item);
+		toggleSidebar();
+	});
 }
+
+/* Sidebar code */
+const parentItems = document.querySelectorAll('.sidebar li.parent_item');
+const subMenus = document.querySelectorAll('.sub-sidebar');
+
+parentItems.forEach(parentItem => {
+	const link = parentItem.querySelector('a');
+	const subMenu = parentItem.querySelector('.sub-sidebar');
+
+	link.addEventListener('click', function(e) {
+		e.preventDefault();
+		parentItems.forEach(item => {
+			if (item !== parentItem) {
+				item.classList.remove('active');
+			}
+		});
+		parentItem.classList.toggle('active');
+
+		subMenus.forEach(menu => {
+			if (menu !== subMenu) {
+				menu.style.display = "none";
+			}
+		});
+
+		if (subMenu.style.display == "block") {
+			subMenu.style.display = "none";
+		} else {
+			subMenu.style.display = "block";
+		}
+	});
+
+	subMenu.addEventListener('click', function(e) {
+		e.stopPropagation();
+	});
+});
+
 
 // Generate Faces
 for (i = 0; i < 99; i++) {

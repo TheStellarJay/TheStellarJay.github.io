@@ -67,12 +67,18 @@
 #guess_button {
 	z-index: 1;
 	position: fixed;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.35);
 	left: 50px;
 	bottom: 50px;
     height: 60px;
     width: 60px;
     border-radius: 50%;
-	border: 1px solid #000;
+	border: 0 solid #000;
+	font-size: 28px;
+	font-weight: bold;
+	color: white;
+	background-color: red;
+	transition: 0.3s;
 }
 .menu {
 	z-index: 1;
@@ -82,7 +88,9 @@
 	width: 100px; /* Set a fixed width */
     height: auto; /* Allow the height to adjust to the content */
     flex-direction: column; /* Change the direction of the flex container to column */
-    border: 1px solid gray;
+	border: 2px solid dimgrey;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 .menu ul {
     list-style: none; /* Remove the bullet points */
@@ -90,25 +98,87 @@
     margin: 0; /* Remove the margin */
     display: flex; /* Make the <ul> a flex container */
     flex-direction: column; /* Change the direction of the flex items to column */
+	border-radius: inherit;
 }
 .menu li {
 	display: block;
 	font-size: 16px;
-    padding: 10px; /* Add some padding */
+	padding: 5px;
     text-align: center; /* Center the text */
+	/*border-radius: inherit;*/
+	border-radius: 5px;
+	margin: 5px;
 }
 .menu .sub-menu {
     display: none; /* Hide the sub-menu by default */
     position: absolute; /* Position the sub-menu relative to the parent li */
-    background-color: white;
-    border: 1px solid gray;
 	width: 150px;
     bottom: -1px; /* Position the sub-menu at the top of the parent li */
     left: 100%; /* Position the sub-menu to the right of the parent li */
+	background-color: white;
+	height: auto; /* Allow the height to adjust to the content */
+	border: 2px solid dimgrey;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
-.menu li:hover .sub-menu {
+.menu li:hover .sub-menu { /*FIXME ALLOW HOVERING OVER MARGINS*/
     display: block; /* Show the sub-menu when the parent li is hovered */
 }
+
+/* mobile sidebar */
+.sidebar {
+	background-color: #f1f1f1;
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	left: -100%;
+	top: 0;
+	overflow-x: hidden;
+	padding-top: 20px;
+	transition: all 0.5s ease-in-out;
+}
+.sidebar ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+.sub-sidebar {
+	display: none;
+}
+.sidebar li {
+	font-size: 18px;
+	margin-bottom: 10px;
+}
+.sidebar li a {
+	display: block;
+	color: #000;
+	text-decoration: none;
+	padding: 10px;
+}
+.sidebar li a:hover {
+	background-color: #ddd;
+}
+.sidebar ul ul li {
+	font-size: 14px;
+	margin-bottom: 0;
+}
+.sidebar li.parent_item > a::before {
+	content: "";
+	display: inline-block;
+	border: solid black;
+	border-width: 0 2px 2px 0;
+	padding: 3px;
+	transform: rotate(-45deg);
+	margin-right: 10px;
+	transition: all 0.2s ease-in-out;
+}
+.sidebar li.parent_item.active > a::before {
+	transform: rotate(45deg);
+}
+.show-submenu {
+	display: block;
+}
+
 
 /* overlay 2 */
 #correct_screen {
@@ -120,7 +190,7 @@
 	background-color: limegreen;
 	height: 100%;
 	width: 100%;
-	transition: opacity 1s ease-in-out !important;
+	transition: opacity 2s ease-in-out !important;
 	display: flex;
 	visibility: hidden;
 	align-items: center;
@@ -136,8 +206,9 @@
 	background-color: red;
 	height: 100%;
 	width: 100%;
-	transition: 2s;
-	display: none;
+	transition: opacity 1.5s ease-in-out !important;
+	display: flex;
+	visibility: hidden;
 	align-items: center;
 	justify-content: center;
 }
@@ -146,6 +217,12 @@
 /* animations */
 .menu li:hover {
 	background-color: #d9d9d9;
+}
+.sidebar-hidden {
+	transform: translateX(-200px);
+}
+#guess_button:hover {
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5);
 }
 .facegrid {
 	transition: grid-template-columns 0.5s;
