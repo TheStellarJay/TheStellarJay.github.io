@@ -85,7 +85,7 @@
 	position: fixed;
     display: none;
     background-color: white;
-	width: 100px; /* Set a fixed width */
+	width: 150px; /* Set a fixed width */
     height: auto; /* Allow the height to adjust to the content */
     flex-direction: column; /* Change the direction of the flex container to column */
 	border: 2px solid dimgrey;
@@ -105,15 +105,15 @@
 	font-size: 16px;
 	padding: 5px;
     text-align: center; /* Center the text */
-	/*border-radius: inherit;*/
+	position: relative;
 	border-radius: 5px;
-	margin: 5px;
+	padding: 10px;
+	position: relative;
 }
 .menu .sub-menu {
     display: none; /* Hide the sub-menu by default */
     position: absolute; /* Position the sub-menu relative to the parent li */
 	width: 150px;
-    bottom: -1px; /* Position the sub-menu at the top of the parent li */
     left: 100%; /* Position the sub-menu to the right of the parent li */
 	background-color: white;
 	height: auto; /* Allow the height to adjust to the content */
@@ -121,8 +121,12 @@
 	border-radius: 10px;
 	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
-.menu li:hover .sub-menu { /*FIXME ALLOW HOVERING OVER MARGINS*/
+.menu li:hover {
+	border-radius: 10px;
+}
+.menu li:hover .sub-menu {
     display: block; /* Show the sub-menu when the parent li is hovered */
+
 }
 
 /* mobile sidebar */

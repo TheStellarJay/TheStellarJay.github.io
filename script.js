@@ -5,9 +5,9 @@ let faces = []
 
 /* Classes */
 class Face {
-	constructor(imagename) {
+	constructor(imageid) {
 		this.element = document.createElement("div");
-		this.element.innerHTML = `<img src='testpics/${imagename}.png'><p>Name</p>`;
+		this.element.innerHTML = `<img src='faces/face${imageid}.jpg'><p>Person ${imageid + 1}</p>`;
 		this.element.classList.add("face");
 
 		this.properties = []
@@ -36,6 +36,8 @@ class Face {
 
 /* Functions */
 async function guess(prop) {
+	console.log(prop)
+	console.log(correct_guesses)
 	let face;
 	let faces_to_delete = [];
 	let correct = correct_guesses.includes(prop);
@@ -137,13 +139,35 @@ for (i = 0; i < guessableitems.length; i++) {
 	});
 }
 
-/* Sidebar code */
+function adjustSubMenuPosition(menuItem) {
+	const menu = menuItem.parentElement.parentElement;
+	const subMenu = menuItem.children[0]
+	subMenu.style.top = "0";
+
+	const menuRect = menu.getBoundingClientRect();
+	const subMenuRect = subMenu.getBoundingClientRect();
+	const bottomOverflow = subMenuRect.bottom - menuRect.bottom;
+
+	if (bottomOverflow > 0) {
+		subMenu.style.top = `-${bottomOverflow}px`;
+	} else {
+		subMenu.style.top = '-1px';
+	}
+}
+
+const menuItems = document.querySelectorAll('.menu li.menu_item');
+menuItems.forEach(menuItem => {
+	menuItem.addEventListener('mouseover', () => {
+		adjustSubMenuPosition(menuItem);
+	});
+});
+
 const parentItems = document.querySelectorAll('.sidebar li.parent_item');
-const subMenus = document.querySelectorAll('.sub-sidebar');
+const subSidebars = document.querySelectorAll('.sub-sidebar');
 
 parentItems.forEach(parentItem => {
 	const link = parentItem.querySelector('a');
-	const subMenu = parentItem.querySelector('.sub-sidebar');
+	const subSidebar = parentItem.querySelector('.sub-sidebar');
 
 	link.addEventListener('click', function(e) {
 		e.preventDefault();
@@ -154,27 +178,27 @@ parentItems.forEach(parentItem => {
 		});
 		parentItem.classList.toggle('active');
 
-		subMenus.forEach(menu => {
-			if (menu !== subMenu) {
+		subSidebars.forEach(menu => {
+			if (menu !== subSidebar) {
 				menu.style.display = "none";
 			}
 		});
 
-		if (subMenu.style.display == "block") {
-			subMenu.style.display = "none";
+		if (subSidebar.style.display == "block") {
+			subSidebar.style.display = "none";
 		} else {
-			subMenu.style.display = "block";
+			subSidebar.style.display = "block";
 		}
 	});
 
-	subMenu.addEventListener('click', function(e) {
+	subSidebar.addEventListener('click', function(e) {
 		e.stopPropagation();
 	});
 });
 
 
 // Generate Faces
-for (i = 0; i < 99; i++) {
+for (i = 0; i < 300; i++) {
 	let faceitem = new Face(i);
 	faceitem.setProperties(props[i])
 	faces.push(faceitem);
