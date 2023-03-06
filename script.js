@@ -73,10 +73,15 @@ async function guess(prop) {
 
 	// Wait 1 seconds
 	await new Promise(resolve => setTimeout(resolve, 1500));
-	if (faces.length < 11) {
-		face_grid.classList.add("largegrid");
+	if (faces.length == 1) {
+		face_grid.classList.add("lastgrid")
 		for (let face in faces) {
 			console.log(face)
+			faces[face].element.classList.add("lastface");
+		}
+	} else if (faces.length < 11) {
+		face_grid.classList.add("largegrid");
+		for (let face in faces) {
 			faces[face].element.classList.add("largeface");
 		}
 	} else if (faces.length < 51) {

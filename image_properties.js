@@ -1,5 +1,5 @@
-export const correct_guesses = [
-	"boy", "whiteskin", "whitebackground", "blueeyes", "brownhair", "smiling"]
+export const correct_guesses = []
+// 	"boy", "whiteskin", "whitebackground", "blueeyes", "brownhair", "smiling"]
 export const guessableitems = [
 	"girl", "boy",
 	"whiteskin", "asianskin", "blackskin", "otherskin",
@@ -18,7 +18,7 @@ export const props = {
 		"girl", "asianskin", "whitebackground", "smiling", "browneyes", "blackhair"
 	],
 	2: [
-		"boy", "whiteskin", "whitebackground", "smiling", "blueeyes", "brownhair"
+		"boy", "whiteskin", "whitebackground", "smiling", "hazeleyes", "brownhair"
 	],
 	3: [
 		"girl", "whiteskin", "whitebackground", "smiling", "greeneyes", "blondehair"

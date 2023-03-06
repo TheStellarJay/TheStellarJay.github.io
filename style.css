@@ -21,6 +21,10 @@
 	grid-template-columns: repeat(auto-fill, 240px) !important ;
 	gap: 10px !important ;
 }
+.lastgrid {
+	display: flex !important ;
+	grid-template-columns: repeat(auto-fill, 435px) !important ;
+}
 
 .face {
 	background: #ffca46;
@@ -61,7 +65,14 @@
 	width: 205px !important;
 	height: 205px !important;
 }
-
+.lastface {
+	width: 410px;
+	font-size: xxx-large;
+}
+.lastface img {
+	width: 400px !important;
+	height: 400px !important;
+}
 
 /* overlay 1 */
 #guess_button {
